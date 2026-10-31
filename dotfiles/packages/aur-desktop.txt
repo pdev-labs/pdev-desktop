@@ -1,0 +1,3 @@
+# AUR-only packages the desktop actually needs. `--aur` installs these;
+# `--all-packages --aur` installs every foreign package instead.
+clipse

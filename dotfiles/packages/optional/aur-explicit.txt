@@ -1,0 +1,8 @@
+android-ndk
+antigravity-ide
+cbonsai
+clipse
+fetch-git
+vscodium-bin
+yay-bin
+yay-bin-debug

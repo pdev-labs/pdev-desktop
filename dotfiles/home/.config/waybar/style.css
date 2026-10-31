@@ -1,0 +1,233 @@
+/* Graphite / teal — palette sampled from the wallpaper, accent from the
+   Hyprland border. Shared with kitty, wofi, swaync, Hyprlock and starship. */
+@define-color background #0b1013;
+@define-color foreground #d7dae1;
+@define-color accent #7ad6e0;
+@define-color hairline #232d31;
+
+
+* {
+  background-color: transparent;
+  color: @foreground;
+
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+  font-family: 'JetBrainsMono Nerd Font';
+  font-size: 12px;
+}
+
+window#waybar {
+  background-color: alpha(@background, 0.90);
+  border-bottom: 1px solid alpha(@foreground, 0.05);
+}
+
+.modules-left {
+  margin-left: 8px;
+}
+
+.modules-right {
+  margin-right: 8px;
+}
+
+/* ── Workspaces ─────────────────────────────────────────────────────────── */
+
+#custom-ws1,
+#custom-ws2,
+#custom-ws3,
+#custom-ws4,
+#custom-ws5,
+#custom-ws6,
+#custom-ws7,
+#custom-ws8,
+#custom-ws9,
+#custom-ws10 {
+  transition: all 90ms ease-in-out;
+  padding: 0 6px;
+  margin: 0 1.5px;
+  min-width: 9px;
+  opacity: 0.4;
+  border: 0px solid transparent;
+  border-bottom-width: 2px;
+}
+
+#custom-ws1.occupied,
+#custom-ws2.occupied,
+#custom-ws3.occupied,
+#custom-ws4.occupied,
+#custom-ws5.occupied,
+#custom-ws6.occupied,
+#custom-ws7.occupied,
+#custom-ws8.occupied,
+#custom-ws9.occupied,
+#custom-ws10.occupied {
+  opacity: 0.9;
+  border-bottom-color: alpha(@foreground, 0.55);
+}
+
+#custom-ws1:hover,
+#custom-ws2:hover,
+#custom-ws3:hover,
+#custom-ws4:hover,
+#custom-ws5:hover,
+#custom-ws6:hover,
+#custom-ws7:hover,
+#custom-ws8:hover,
+#custom-ws9:hover,
+#custom-ws10:hover {
+  opacity: 1;
+  background-color: alpha(@foreground, 0.10);
+  border-radius: 4px;
+}
+
+#custom-ws1.active,
+#custom-ws2.active,
+#custom-ws3.active,
+#custom-ws4.active,
+#custom-ws5.active,
+#custom-ws6.active,
+#custom-ws7.active,
+#custom-ws8.active,
+#custom-ws9.active,
+#custom-ws10.active {
+  opacity: 1;
+  border-bottom-width: 3px;
+  border-bottom-color: @accent;
+}
+
+/* ── Pill clusters ──────────────────────────────────────────────────────── */
+
+/* Waybar names a group's container after the group itself (group/system -> #system). */
+#system,
+#net,
+#actions {
+  background-color: alpha(@foreground, 0.06);
+  border: 1px solid alpha(@foreground, 0.05);
+  border-radius: 8px;
+  margin: 3px 4px;
+  padding: 0 4px;
+}
+
+#memory,
+#disk,
+#cpu,
+#temperature,
+#bluetooth,
+#network,
+#custom-dnd {
+  margin: 0 5px;
+}
+
+#custom-power {
+  margin: 0 6px 0 2px;
+}
+
+/* ── Status modules ─────────────────────────────────────────────────────── */
+
+#battery,
+#backlight,
+#custom-update {
+  min-width: 12px;
+  margin: 0 6px;
+}
+
+#custom-update {
+  font-size: 10px;
+}
+
+#custom-audio {
+  margin: 0 5px;
+}
+
+#custom-audio.muted {
+  color: alpha(@foreground, 0.55);
+}
+
+#custom-dnd.on {
+  color: #f0cf8e;
+}
+
+#tray {
+  margin-right: 4px;
+}
+
+#custom-expand-icon {
+  margin-right: 8px;
+}
+
+#clock {
+  margin-left: 8px;
+  font-weight: 600;
+}
+
+#window {
+  margin: 0 10px;
+  font-size: 12px;
+  color: alpha(@foreground, 0.75);
+}
+
+#mpris {
+  background-color: alpha(@foreground, 0.045);
+  border-radius: 8px;
+  padding: 0 10px;
+  margin: 3px 4px;
+  font-weight: 600;
+}
+
+#custom-launcher {
+  background-color: alpha(@accent, 0.10);
+  color: @accent;
+  min-width: 24px;
+  padding: 0 6px;
+  margin: 0 4px 0 1px;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+/* ── States ─────────────────────────────────────────────────────────────── */
+
+#clock,
+#memory,
+#cpu,
+#disk,
+#temperature,
+#backlight {
+  color: alpha(@foreground, 0.92);
+}
+
+#battery.warning:not(.charging) {
+  color: #f0cf8e;
+}
+
+#battery.critical:not(.charging) {
+  color: #ff7b86;
+}
+
+#cpu.warning,
+#memory.warning,
+#disk.warning {
+  color: #f0cf8e;
+}
+
+#cpu.critical,
+#memory.critical,
+#disk.critical,
+#temperature.critical {
+  color: #ff7b86;
+}
+
+/* ── Tooltips ───────────────────────────────────────────────────────────── */
+
+tooltip {
+  background-color: @background;
+  border: 1px solid @hairline;
+  border-radius: 8px;
+  padding: 6px 8px;
+  color: @foreground;
+}
+
+tooltip label {
+  color: @foreground;
+}

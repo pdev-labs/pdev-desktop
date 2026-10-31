@@ -1,0 +1,42 @@
+{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+
+    "logo": {
+        "type": "file-raw",
+        "source": "~/.config/fastfetch/mark.txt",
+        "padding": { "left": 1, "right": 3 }
+    },
+
+    "display": {
+        "separator": "  ",
+        "key": { "width": 11 },
+        "color": {
+            "keys": "#7aa2f7",
+            "title": "#7aa2f7",
+            "separator": "#3a3f4b"
+        },
+        "brightColor": false
+    },
+
+    "modules": [
+        { "type": "title", "format": "{user-name}@{host-name}" },
+        { "type": "separator", "string": "─", "times": 30 },
+        "os",
+        { "type": "host", "key": "Model" },
+        "kernel",
+        "uptime",
+        { "type": "packages", "key": "Packages", "format": "{pacman}" },
+        "shell",
+        "terminal",
+        { "type": "wm", "key": "WM" },
+        { "type": "display", "key": "Display" },
+        { "type": "cpu", "key": "CPU" },
+        { "type": "gpu", "key": "GPU" },
+        { "type": "memory", "key": "Memory" },
+        { "type": "swap", "key": "Swap" },
+        { "type": "disk", "key": "Disk" },
+        { "type": "localip", "key": "Local IP" },
+        { "type": "battery", "key": "Battery" },
+        { "type": "colors", "symbol": "block", "padding": { "top": 1 } }
+    ]
+}

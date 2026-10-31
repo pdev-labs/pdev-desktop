@@ -1,0 +1,93 @@
+/* Graphite base + the cyan/blue accent used everywhere else. */
+@define-color bg      #17181d;
+@define-color surface #23262e;
+@define-color fg      #d7dae1;
+@define-color muted   #8a909c;
+@define-color dim     #5c6370;
+@define-color cyan    #7ad6e0;
+@define-color blue    #7aa2f7;
+@define-color border  #2b3140;
+
+* {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 14px;
+}
+
+/* Real rounded corners: the surface stays transparent, the inner box paints. */
+window {
+  background-color: transparent;
+  padding: 12px;
+}
+
+#outer-box {
+  background-color: alpha(@bg, 0.88);
+  border: 1px solid @border;
+  border-radius: 16px;
+  padding: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+}
+
+#input {
+  margin: 0 0 10px 0;
+  padding: 9px 14px;
+  background-color: @surface;
+  color: @fg;
+  border: 1px solid @border;
+  border-bottom: 2px solid alpha(@cyan, 0.55);
+  border-radius: 9px;
+  caret-color: @cyan;
+}
+
+#input:focus {
+  border-color: alpha(@cyan, 0.65);
+}
+
+#scroll {
+  margin: 0;
+}
+
+#inner-box {
+  margin: 0;
+}
+
+#entry {
+  padding: 11px 12px;
+  margin: 2px 0;
+  border-radius: 9px;
+  border-left: 2px solid transparent;
+  color: @fg;
+}
+
+#entry image {
+  margin-right: 12px;
+}
+
+#entry:hover {
+  background-color: alpha(@fg, 0.05);
+}
+
+#entry:selected {
+  background-color: alpha(@cyan, 0.10);
+  background-image: linear-gradient(90deg, alpha(@cyan, 0.18), alpha(@blue, 0.04));
+  border-left: 2px solid @cyan;
+}
+
+#text {
+  color: @fg;
+}
+
+#text:selected {
+  color: @fg;
+  font-weight: 600;
+}
+
+#scroll scrollbar {
+  background-color: transparent;
+  min-width: 4px;
+}
+
+#scroll scrollbar slider {
+  background-color: alpha(@fg, 0.18);
+  border-radius: 2px;
+  min-height: 24px;
+}

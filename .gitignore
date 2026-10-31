@@ -1,0 +1,11 @@
+# Local backups of /etc (only produced by `backup.sh --system`)
+dotfiles/system/
+
+# Generated on every backup run; machine-specific
+dotfiles/manifest-*.txt
+
+# Never publish credentials
+dotfiles/home/.config/omniroute/
+*.env
+*.log
+__pycache__/

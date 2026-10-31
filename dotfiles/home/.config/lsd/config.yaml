@@ -1,0 +1,20 @@
+classic: false
+blocks:
+  - permission
+  - user
+  - group
+  - size
+  - date
+  - name
+color:
+  when: auto
+  theme: custom
+icons:
+  when: auto
+  theme: fancy
+  separator: " "
+sorting:
+  dir-grouping: first
+date: "+%d %b %H:%M"
+size: default
+permission: rwx

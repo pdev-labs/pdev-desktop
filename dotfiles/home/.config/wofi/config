@@ -1,0 +1,10 @@
+mode=drun
+allow_images=true
+image_size=24
+width=560
+height=420
+location=center
+prompt=Search
+insensitive=false
+matching=fuzzy
+no_actions=true

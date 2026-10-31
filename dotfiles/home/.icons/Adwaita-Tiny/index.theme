@@ -1,0 +1,4 @@
+[Icon Theme]
+Name=Adwaita-Tiny
+Comment=Adwaita cursors resampled with Lanczos to sizes 1-24 px
+Inherits=Adwaita

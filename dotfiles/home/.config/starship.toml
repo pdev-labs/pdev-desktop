@@ -1,0 +1,129 @@
+# =============================================================================
+#  Starship — "Graphite"
+#  Matches ~/.config/ghostty/config and ~/.config/fastfetch/config.jsonc
+#  Docs: https://starship.rs/config/
+#  Test: starship prompt --path "$PWD"
+# =============================================================================
+
+add_newline     = true
+command_timeout = 500
+scan_timeout    = 10
+palette         = "graphite"
+
+# Line 1: user@host › directory › time, as powerline blocks (time right-aligned).
+# Line 2: repo state, toolchain, duration, exit code, battery, caret.
+format = "$username$hostname[\uE0B0](fg:blue bg:surface)$directory$fill[\uE0B0](fg:surface bg:blue)$time[\uE0B0](fg:blue)$line_break$os$git_branch$git_status$python$nodejs$rust$golang$cmd_duration$status$battery$character"
+
+# --- Identity ----------------------------------------------------------------
+# Always visible, not just over SSH. Root gets the same treatment in red.
+[username]
+show_always  = true
+style_user   = "bg:blue fg:bg bold"
+style_root   = "bg:red fg:bg bold"
+format       = "[ $user]($style)"
+
+[hostname]
+ssh_only = false
+style    = "bg:blue fg:bg bold"
+format   = "[@$hostname ]($style)"
+
+# --- Location & time ---------------------------------------------------------
+[fill]
+symbol = " "
+
+[directory]
+style             = "bg:surface fg:fg"
+format            = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+truncate_to_repo  = false
+
+[time]
+disabled    = false
+time_format = "%H:%M"
+style       = "bg:blue fg:bg bold"
+format      = "[ $time ]($style)"
+
+# --- Repository --------------------------------------------------------------
+[git_branch]
+symbol = "\uE0A0 "
+style  = "fg:green"
+format = "[ $symbol$branch]($style)"
+
+[git_status]
+style  = "fg:yellow"
+format = "[ $all_status$ahead_behind]($style)"
+
+# --- Toolchain (hidden unless the project uses it) ---------------------------
+# Nerd Font devicons, not emoji: Python, Node, Rust, Go.
+[os]
+disabled = false
+style    = "fg:cyan"
+format   = "[ $symbol]($style)"
+
+[os.symbols]
+Arch = "\uF303"
+
+[python]
+symbol = "\uE73C "
+style  = "fg:yellow"
+format = "[ $symbol$version]($style)"
+
+[nodejs]
+symbol = "\uE718 "
+style  = "fg:green"
+format = "[ $symbol$version]($style)"
+
+[rust]
+symbol = "\uE7A8 "
+style  = "fg:red"
+format = "[ $symbol$version]($style)"
+
+[golang]
+symbol = "\uE627 "
+style  = "fg:cyan"
+format = "[ $symbol$version]($style)"
+
+# --- Command feedback --------------------------------------------------------
+[cmd_duration]
+min_time = 1000
+style    = "fg:dim"
+format   = "[ $duration]($style)"
+
+[status]
+disabled = false
+style    = "fg:red"
+format   = "[ ✗ $status]($style)"
+
+# --- Laptop ------------------------------------------------------------------
+[battery]
+full_symbol        = ""
+charging_symbol    = ""
+discharging_symbol = ""
+format             = "[ $percentage]($style)"
+
+[[battery.display]]
+threshold = 100
+style     = "fg:green"
+
+# --- Caret -------------------------------------------------------------------
+[character]
+format         = " $symbol "
+success_symbol = "[❯](bold fg:blue)"
+error_symbol   = "[❯](bold fg:red)"
+vimcmd_symbol  = "[❮](bold fg:green)"
+
+# --- Palette -----------------------------------------------------------------
+# Keep this table last: every key after a table header belongs to that table.
+[palettes.graphite]
+bg      = "#17181d"
+surface = "#23262e"
+fg      = "#d7dae1"
+muted   = "#8a909c"
+dim     = "#5c6370"
+blue    = "#7aa2f7"
+cyan    = "#7ad6e0"
+green   = "#a9d98a"
+yellow  = "#f0cf8e"
+red     = "#ff7b86"
+magenta = "#d79ae8"

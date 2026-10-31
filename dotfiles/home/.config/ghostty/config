@@ -1,0 +1,192 @@
+# =============================================================================
+#  Ghostty — "Graphite"
+#  Ghostty 1.3.1 · Linux/GTK · Wayland (Hyprland)
+#
+#  Install:  ~/.config/ghostty/config
+#  Reload:   Ctrl+Shift+,        Validate:  ghostty +validate-config
+# =============================================================================
+
+# --- Palette -----------------------------------------------------------------
+# Neutral graphite base, cool cast. Every normal color keeps at least 5:1
+# contrast against the background; dim colors get a floor from minimum-contrast.
+
+background            = #17181d
+foreground            = #d7dae1
+selection-background  = #2f3646
+selection-foreground  = #f2f4f8
+
+palette = 0=#1f2229
+palette = 1=#e06c75
+palette = 2=#98c379
+palette = 3=#e5c07b
+palette = 4=#61afef
+palette = 5=#c678dd
+palette = 6=#56b6c2
+palette = 7=#c8ccd4
+palette = 8=#5c6370
+palette = 9=#ff7b86
+palette = 10=#a9d98a
+palette = 11=#f0cf8e
+palette = 12=#7cc0ff
+palette = 13=#d79ae8
+palette = 14=#7ad6e0
+palette = 15=#f2f4f8
+
+# --- Cursor ------------------------------------------------------------------
+# Bar cursor, blinking, always. Shell integration would flip it to a block
+# while a command runs, so cursor control is disabled further down.
+
+cursor-style        = bar
+cursor-style-blink  = true
+cursor-color        = #7ad6e0
+cursor-text         = #17181d
+
+# --- Typography --------------------------------------------------------------
+# Nerd Font variant is installed here (icons for starship, eza, lazygit…).
+# The plain family is a fallback for machines without the NF build.
+
+font-family = JetBrainsMono Nerd Font
+font-family = JetBrains Mono
+font-size   = 13
+
+# A little extra leading keeps dense TUI output readable without wasting rows.
+adjust-cell-height = 6%
+
+# --- Window & tabs -----------------------------------------------------------
+
+window-padding-x            = 16
+window-padding-y            = 14
+window-padding-balance      = true
+window-new-tab-position     = end
+window-inherit-working-directory = true
+tab-inherit-working-directory    = true
+
+# Chrome-free: no GTK titlebar, no tab strip. Hyprland draws the frame.
+window-decoration  = none
+gtk-titlebar       = false
+window-show-tab-bar = never
+window-theme       = ghostty
+
+# --- Transparency & splits ---------------------------------------------------
+# Window is slightly translucent, but cells with an explicit background (tmux,
+# Neovim, htop) stay opaque so text never sits on a busy backdrop.
+
+background-opacity       = 0.94
+background-opacity-cells = false
+
+# Fine carbon-lattice texture, blended under the window colour so text stays crisp.
+background-image          = /home/pdev/.config/ghostty/graphite-hex.png
+background-image-opacity  = 0.70
+background-image-fit      = cover
+background-image-position = center
+background-image-repeat   = false
+
+# Ghostty's own blur is KDE-only. On Hyprland the compositor does the blur;
+# enable it in hyprland.conf (see the notes at the bottom of this file).
+background-blur = false
+
+unfocused-split-opacity = 0.86
+unfocused-split-fill    = #101116
+split-divider-color     = #2f3646
+
+# --- Behavior ----------------------------------------------------------------
+
+minimum-contrast   = 1.1
+scrollback-limit   = 10000000
+mouse-hide-while-typing = true
+
+# Copy selections to both the primary and system clipboard.
+copy-on-select = clipboard
+
+# No scrollbar gutter; mouse and keybinds still scroll.
+scrollbar = never
+
+# "ask" keeps the default safety prompt for OSC 52 clipboard reads.
+clipboard-read     = ask
+clipboard-write    = allow
+
+# Warn before closing a surface with a running process.
+confirm-close-surface = true
+
+# Silence the bell and all desktop notifications. `attention` only sets the
+# window-manager urgency hint; remove it for zero feedback of any kind.
+bell-features          = no-audio,no-system,no-title,no-border,attention
+desktop-notifications  = false
+notify-on-command-finish = never
+
+# Keep title/path/sudo integration, but let this config own the cursor shape.
+shell-integration-features = no-cursor,no-sudo,title,no-ssh-env,no-ssh-terminfo,path
+
+# --- Quick terminal ----------------------------------------------------------
+# Quake-style dropdown from the top of the screen, 35% of the display height.
+
+quick-terminal-position   = top
+quick-terminal-size       = 35%
+quick-terminal-autohide   = true
+gtk-quick-terminal-layer  = overlay
+
+# --- Keybindings -------------------------------------------------------------
+# Split navigation in Vim order. `performable:` passes the key to the program
+# when there is no split in that direction. Caveat: once a split is open,
+# Ctrl+H/J/K/L are consumed here, so Neovim and tmux never see them. If that
+# gets in the way, delete this block and use the Alt+ variants below.
+
+keybind = performable:ctrl+h=goto_split:left
+keybind = performable:ctrl+j=goto_split:down
+keybind = performable:ctrl+k=goto_split:up
+keybind = performable:ctrl+l=goto_split:right
+
+# Neovim/tmux-safe alternatives:
+# keybind = performable:alt+h=goto_split:left
+# keybind = performable:alt+j=goto_split:down
+# keybind = performable:alt+k=goto_split:up
+# keybind = performable:alt+l=goto_split:right
+
+# Resize splits with Ctrl+Alt + direction.
+keybind = ctrl+alt+h=resize_split:left,10
+keybind = ctrl+alt+j=resize_split:down,10
+keybind = ctrl+alt+k=resize_split:up,10
+keybind = ctrl+alt+l=resize_split:right,10
+
+# Quick terminal toggle. To make it work while another app is focused, try
+# `global:` instead of nothing — it needs the XDG GlobalShortcuts portal and
+# is ignored on some Wayland setups:
+# keybind = global:ctrl+backquote=toggle_quick_terminal
+keybind = ctrl+backquote=toggle_quick_terminal
+
+# Close the focused pane rather than the whole tab (Ctrl+Shift+W still closes
+# the tab, as shipped by default).
+keybind = ctrl+shift+x=close_surface
+
+# Toggle translucency: a quick "solid mode" for screenshots or focus.
+keybind = ctrl+shift+b=toggle_background_opacity
+
+# Font size. Ctrl+= / Ctrl++ / Ctrl+Shift+= zoom in, Ctrl+- zooms out,
+# Ctrl+0 restores the configured size. Ctrl+wheel is handled in
+# ~/.config/hypr/hyprland.lua because Ghostty 1.3.1 has no mouse binds.
+keybind = ctrl+equal=increase_font_size:1
+keybind = ctrl+plus=increase_font_size:1
+keybind = ctrl+shift+equal=increase_font_size:1
+keybind = ctrl+shift+plus=increase_font_size:1
+keybind = ctrl+minus=decrease_font_size:1
+keybind = ctrl+shift+minus=decrease_font_size:1
+keybind = ctrl+0=reset_font_size
+
+# Word deletion in readline/shell apps. Ctrl+Backspace sends Ctrl+W
+# (backward-kill-word); Ctrl+Delete sends CSI 3;5~ (kill-word forward).
+keybind = ctrl+backspace=text:\x17
+keybind = ctrl+delete=csi:3;5~
+
+# =============================================================================
+#  Hyprland notes (these live in hyprland.conf, not here)
+#
+#  Blur — Ghostty's background-blur is KDE-only, Hyprland blurs the window:
+#      decoration {
+#          blur { enabled = true; size = 5; passes = 3 }
+#      }
+#
+#  Optional extra dimming when unfocused (multiplies with background-opacity):
+#      windowrule = opacity 0.97 0.90, class:^(com\.mitchellh\.ghostty)$
+#
+#  Confirm the class name with:  hyprctl clients | grep -i ghostty
+# =============================================================================
