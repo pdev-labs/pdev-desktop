@@ -60,7 +60,9 @@ PATHS=(
 for rel in "${PATHS[@]}"; do
     [[ -e "$HOME/$rel" ]] || continue
     mkdir -p "$SRC/home/$(dirname "$rel")"
-    rsync -a "$HOME/$rel" "$SRC/home/$(dirname "$rel")/"
+    rsync -a --exclude='*.bak-*' --exclude='*.log' \
+        --exclude='__pycache__' --exclude='*.disabled' \
+        "$HOME/$rel" "$SRC/home/$(dirname "$rel")/"
 done
 
 # ── Manifests ─────────────────────────────────────────────────────────────
