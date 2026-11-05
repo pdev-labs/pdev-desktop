@@ -19,7 +19,7 @@ A Graphite/teal desktop for **Arch Linux + Hyprland**: a wallpaper-derived palet
 - **SwayNC** — 380 px control centre, Graphite cards, cyan progress bar, DND switch.
 - **Hyprlock** — static wallpaper background (no screencopy), blurred, JetBrains Mono clock, password dots, error/caps-lock colours.
 - **Hyprland** — 3/6 gaps, 10 px rounding, cyan→blue borders, soft shadows, inactive dim, wofi-only blur (windows stay sharp for the iGPU).
-- **Kitty** — JetBrains Mono Nerd Font Mono, Graphite ANSI palette, 6 px padding, beam cursor, thin cyan scrollbar.
+- **Kitty** — JetBrains Mono Nerd Font Mono, Graphite ANSI palette, 6 px padding, beam cursor, thin cyan scrollbar, select-to-copy.
 
 ## Palette
 
