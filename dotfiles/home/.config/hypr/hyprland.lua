@@ -63,6 +63,8 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("waybar")
 	hl.exec_cmd("/home/pdev/.config/waybar/scripts/ws-sync.sh")
 	hl.exec_cmd("/home/pdev/.config/waybar/scripts/audio-watch.sh")
+	-- One wl-paste watcher for the "Copied to clipboard" toast.
+	hl.exec_cmd("/home/pdev/.config/hypr/scripts/clipboard-toast.sh")
 	-- hypridle is optional: start it only once the package is installed.
 	hl.exec_cmd("command -v hypridle >/dev/null 2>&1 && hypridle")
 	-- Polkit agent for GUI authentication prompts (package: hyprpolkitagent).

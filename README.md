@@ -16,7 +16,8 @@ A Graphite/teal desktop for **Arch Linux + Hyprland**: a wallpaper-derived palet
 - **Waybar pill clusters** — `system` (memory/disk/CPU/temp), `net` (Bluetooth/Wi-Fi) and `actions` (DND/power), plus 1–10 clickable Roman-numeral workspaces with occupancy underlines.
 - **Silent volume scroll** — scrolling changes volume without a popup; hovering shows `Volume 50%` with a 24-cell bar.
 - **Wofi** — 560×420, 16 px corners, cyan→blue selection, real rounded corners, blurred/dimmed backdrop.
-- **SwayNC** — 380 px control centre, Graphite cards, cyan progress bar, DND switch.
+- **SwayNC** — 380 px control centre, Graphite cards, cyan progress bar, DND switch, and a short clipboard toast.
+- **Clipboard toast** — one `wl-paste` watcher raises a 1.4 s SwayNC notification on every text copy; the copied content is never printed.
 - **Hyprlock** — static wallpaper background (no screencopy), blurred, JetBrains Mono clock, password dots, error/caps-lock colours.
 - **Hyprland** — 3/6 gaps, 10 px rounding, cyan→blue borders, soft shadows, inactive dim, wofi-only blur (windows stay sharp for the iGPU).
 - **Kitty** — JetBrains Mono Nerd Font Mono, Graphite ANSI palette, 6 px padding, beam cursor, thin cyan scrollbar, select-to-copy.
@@ -196,6 +197,16 @@ Then reopen Nautilus/pavucontrol/blueman.
 
 **Electron apps do not start**  
 XWayland is disabled in `hyprland.lua`. Launch with `--ozone-platform=wayland`, or enable XWayland if you need it.
+
+**No copy toast**  
+Check the watcher and the clipboard type:
+
+```bash
+pgrep -af clipboard-toast
+wl-paste --type text/plain | head -c 40
+```
+
+The toast needs SwayNC running (`systemctl --user status swaync`). If you copy an image, no toast is shown by design.
 
 **No lock/suspend on idle**  
 `hypridle` must be installed and started (the installer does both on the next login). Check `pgrep hypridle`.
